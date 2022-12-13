@@ -34,6 +34,7 @@
 #include "gstrtph264pay.h"
 #include "gstrtputils.h"
 
+#include "hs_buffer_copy_into.inl"
 
 #define IDR_TYPE_ID  5
 #define SPS_TYPE_ID  7
@@ -977,7 +978,7 @@ gst_rtp_h264_pay_payload_nal (GstRTPBasePayload * basepayload,
 
       /* insert payload memory block */
       gst_rtp_copy_video_meta (rtph264pay, outbuf, paybuf);
-      gst_buffer_copy_into (outbuf, paybuf, GST_BUFFER_COPY_MEMORY, pos,
+      hs_buffer_copy_into (outbuf, paybuf, GST_BUFFER_COPY_MEMORY, pos,
           limitedSize);
 
       if (!delta_unit)
